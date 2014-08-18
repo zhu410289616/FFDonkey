@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>52189CC8-E909-462E-AD17-1376CBBFE122</string>
+	<key>IDESourceControlProjectName</key>
+	<string>FFDonkey</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>137DDFEA-B156-4F2D-9F71-B22C96049DF6</key>
+		<string>https://github.com/zhu410289616/FFDonkey</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>proj.ios/FFDonkey.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>137DDFEA-B156-4F2D-9F71-B22C96049DF6</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/zhu410289616/FFDonkey</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>137DDFEA-B156-4F2D-9F71-B22C96049DF6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>137DDFEA-B156-4F2D-9F71-B22C96049DF6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FFDonkey</string>
+		</dict>
+	</array>
+</dict>
+</plist>

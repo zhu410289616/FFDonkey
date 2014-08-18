@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>level</key>
+		<integer>1</integer>
+		<key>map</key>
+		<string>level_1.map</string>
+		<key>background_music</key>
+		<string>default_background_music.wav</string>
+		<key>push_effect</key>
+		<string>default_push_effect.wav</string>
+		<key>win_effect</key>
+		<string>default_win_effect.wav</string>
+	</dict>
+	<dict>
+		<key>level</key>
+		<integer>2</integer>
+		<key>map</key>
+		<string>level_2.map</string>
+		<key>background_music</key>
+		<string>default_background_music.wav</string>
+		<key>push_effect</key>
+		<string>default_push_effect.wav</string>
+		<key>win_effect</key>
+		<string>default_win_effect.wav</string>
+	</dict>
+	<dict>
+		<key>level</key>
+		<integer>2</integer>
+		<key>map</key>
+		<string>level_2.map</string>
+		<key>background_music</key>
+		<string>default_background_music.wav</string>
+		<key>push_effect</key>
+		<string>default_push_effect.wav</string>
+		<key>win_effect</key>
+		<string>default_win_effect.wav</string>
+	</dict>
+	<dict>
+		<key>level</key>
+		<integer>3</integer>
+		<key>map</key>
+		<string>level_3.map</string>
+		<key>background_music</key>
+		<string>default_background_music.wav</string>
+		<key>push_effect</key>
+		<string>default_push_effect.wav</string>
+		<key>win_effect</key>
+		<string>default_win_effect.wav</string>
+	</dict>
+</array>
+</plist>
