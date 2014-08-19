@@ -34,11 +34,12 @@ FFLevel::FFLevel(CCDictionary *dict)
     this->m_pWinEffect = (CCString *)dict->objectForKey(key);
     
     //
-    this->m_pMapElementArray = CCArray::create();
+    this->m_pMapElements = CCArray::create();
     
     std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename(this->m_pMapName->m_sString.c_str());
     std::string mapString = FFFileManager::readFileWithPath(path.c_str());
     this->m_pMapString = CCString::create(mapString);
+    this->m_pMapString->retain();
     
     this->resetMapElements();
 }
@@ -57,7 +58,7 @@ void FFLevel::resetMapElements()
     
     if (tempString.length() > 0) {
         
-        this->m_pMapElementArray->removeAllObjects();
+        this->m_pMapElements->removeAllObjects();
         
         const char *rowEndFlag = "\n";
         int rowBegin = 0;

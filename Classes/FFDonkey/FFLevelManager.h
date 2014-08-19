@@ -20,21 +20,24 @@ class FFLevelManager : CCObject
 {
 public:
     static FFLevelManager *sharedInstance();
-    static FFLevelManager *create();
     
 private:
-    FFLevelManager();
-    ~FFLevelManager();
+    FFLevelManager(){};
     
 public:
-    virtual bool init();
+    ~FFLevelManager();
     
+    virtual bool init();
+    CREATE_FUNC(FFLevelManager);
+    
+    bool setCurrentLevel(unsigned int currentLevel);
+    FFLevel *currentLevel();
     bool hasPrevLevel();
     bool hasNextLevel();
     FFLevel *prevLevel();
     FFLevel *nextLevel();
     
-public:
+private:
     CCArray *m_pLevelArray;
     unsigned int m_nCurrentLevel;
     FFLevel *m_pLevel;

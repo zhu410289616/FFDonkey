@@ -30,7 +30,7 @@ typedef enum FFDirection {
 class FFBoxMan : public CCSprite
 {
 public:
-    static FFBoxMan *create();
+    CREATE_FUNC(FFBoxMan);
     
 public:
     virtual bool init();

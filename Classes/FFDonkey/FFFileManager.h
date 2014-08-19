@@ -18,11 +18,14 @@ class FFFileManager : CCObject
 {
 public:
     static FFFileManager *sharedInstance();
-    static FFFileManager *create();
+    CREATE_FUNC(FFFileManager);
     
     static string readFileWithPath(const char* pPath);
     static bool writeFileWithPath(char* pContent, const char* pPath);
-    
+
+public:
+    virtual bool init();
+
 private:
     FFFileManager();
     ~FFFileManager();

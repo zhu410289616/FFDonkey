@@ -18,15 +18,9 @@ FFFileManager* FFFileManager::sharedInstance()
     return instance;
 }
 
-FFFileManager* FFFileManager::create()
+bool FFFileManager::init()
 {
-    FFFileManager *pFileManager = new  FFFileManager();
-    if (pFileManager) {
-        pFileManager->autorelease();
-        return pFileManager;
-    }
-    CC_SAFE_RELEASE(pFileManager);
-    return NULL;
+    return true;
 }
 
 string FFFileManager::readFileWithPath(const char *pPath)

@@ -55,6 +55,6 @@ void FFDonkeyScene::menuStartCallback(CCObject *pSender)
 {
     CCLOG("menuStartCallback...");
     
-    FFLevelManager::sharedInstance()->m_nCurrentLevel = 1;
+    FFLevelManager::sharedInstance()->setCurrentLevel(1);
     CCDirector::sharedDirector()->replaceScene(FFGameScene::scene());
 }

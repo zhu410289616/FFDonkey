@@ -8,21 +8,13 @@
 
 #include "FFBoxMan.h"
 
-FFBoxMan* FFBoxMan::create()
-{
-    FFBoxMan *boxMan = new FFBoxMan();
-    if (boxMan && boxMan->init()) {
-        boxMan->setDirection(FFDirectionDown);
-        boxMan->autorelease();
-        return boxMan;
-    }
-    CC_SAFE_RELEASE(boxMan);
-    return NULL;
-}
-
 bool FFBoxMan::init()
 {
-    return initWithFile("man_baby.png");
+    if (initWithFile("man_baby.png")) {
+        this->setDirection(FFDirectionDown);
+        return true;
+    }
+    return false;
 }
 
 void FFBoxMan::setDirection(FFDirection direction)

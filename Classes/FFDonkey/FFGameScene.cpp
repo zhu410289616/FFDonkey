@@ -7,6 +7,7 @@
 //
 
 #include "FFGameScene.h"
+#include "FFLevelManager.h"
 
 CCScene* FFGameScene::scene()
 {
@@ -26,7 +27,9 @@ bool FFGameScene::init()
     CCSize visibleSize = CCDirector::sharedDirector()->getWinSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
     
-//    this->m_pMapLayer = FFMapLayer::create();
+    this->m_pMapLayer = new FFMapLayer(); //FFMapLayer::create();
+    this->m_pMapLayer->loadMapWithLevel(FFLevelManager::sharedInstance()->currentLevel());
+    this->addChild(this->m_pMapLayer, 1);
     
     CCMenuItemFont *pExitItem = CCMenuItemFont::create("exit", this, menu_selector(FFGameScene::menuExitCallback));
     pExitItem->setPosition(ccp(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));

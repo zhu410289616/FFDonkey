@@ -14,28 +14,13 @@ FFLevelManager* FFLevelManager::sharedInstance()
 {
     if (!instance) {
         instance = FFLevelManager::create();
-        instance->init();
     }
     return instance;
 }
 
-FFLevelManager* FFLevelManager::create()
-{
-    FFLevelManager *pLevelManager = new FFLevelManager();
-    if (pLevelManager) {
-        pLevelManager->autorelease();
-        return pLevelManager;
-    }
-    CC_SAFE_RELEASE(pLevelManager);
-    return NULL;
-}
-
-FFLevelManager::FFLevelManager()
-{
-}
-
 FFLevelManager::~FFLevelManager()
 {
+//    CC_SAFE_DELETE_ARRAY(this->m_pLevelArray);
 }
 
 bool FFLevelManager::init()
@@ -44,6 +29,7 @@ bool FFLevelManager::init()
     
     do {
         this->m_pLevelArray = CCArray::create();
+        this->m_pLevelArray->retain();
         
         const char *plistPath = "level.plist";
         CCArray *plistArray = CCArray::createWithContentsOfFile(plistPath);
@@ -51,21 +37,36 @@ bool FFLevelManager::init()
         CCARRAY_FOREACH(plistArray, object)
         {
             CCDictionary *dict = (CCDictionary *)object;
-            FFLevel *level = FFLevel::levelWithDictionary(dict);
+            FFLevel *level = new FFLevel(dict);//FFLevel::levelWithDictionary(dict);
+            level->retain();
             this->m_pLevelArray->addObject(level);
         }
         
         //read data from cache
         //todo
-        if (plistArray->count() > 0 && this->m_nCurrentLevel < plistArray->count()) {
-            this->m_pLevel = (FFLevel *)this->m_pLevelArray->objectAtIndex(this->m_nCurrentLevel);
-        }
+        this->setCurrentLevel(this->m_nCurrentLevel);
         
         bRet = true;
         
     } while (0);
     
     return bRet;
+}
+
+bool FFLevelManager::setCurrentLevel(unsigned int currentLevel)
+{
+    if (this->m_pLevelArray->count() == 0) {
+        return false;
+    }
+    this->m_nCurrentLevel = MAX(0, currentLevel);
+    this->m_nCurrentLevel = MIN(this->m_pLevelArray->count()-1, currentLevel);
+    this->m_pLevel = (FFLevel *)this->m_pLevelArray->objectAtIndex(this->m_nCurrentLevel);
+    return true;
+}
+
+FFLevel* FFLevelManager::currentLevel()
+{
+    return this->m_pLevel;
 }
 
 bool FFLevelManager::hasPrevLevel()

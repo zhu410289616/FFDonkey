@@ -30,7 +30,7 @@ public:
     CCString *m_pBackgroundMusic;
     CCString *m_pPushEffect;
     CCString *m_pWinEffect;
-    CCArray *m_pMapElementArray;
+    CCArray *m_pMapElements;
     
 private:
     CCString *m_pMapName;
