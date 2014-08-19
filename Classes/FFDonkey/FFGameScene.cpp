@@ -13,9 +13,17 @@ CCScene* FFGameScene::scene()
 {
     CCScene *scene = CCScene::create();
     FFGameScene *layer = FFGameScene::create();
-    layer->setContentSize(CCDirector::sharedDirector()->getWinSize());
+    layer->setContentSize(CCDirector::sharedDirector()->getVisibleSize());
     scene->addChild(layer);
     return scene;
+}
+
+FFGameScene::FFGameScene()
+{}
+
+FFGameScene::~FFGameScene()
+{
+//    CC_SAFE_RELEASE(this->m_pMapLayer);
 }
 
 bool FFGameScene::init()
@@ -27,8 +35,10 @@ bool FFGameScene::init()
     CCSize visibleSize = CCDirector::sharedDirector()->getWinSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
     
-    this->m_pMapLayer = new FFMapLayer(); //FFMapLayer::create();
-    this->m_pMapLayer->loadMapWithLevel(FFLevelManager::sharedInstance()->currentLevel());
+    this->m_pMapLayer = FFMapLayer::create();
+    this->m_pMapLayer->retain();
+    FFLevel *tempLevel = FFLevelManager::sharedInstance()->currentLevel();
+    this->m_pMapLayer->loadMapWithLevel(tempLevel);
     this->addChild(this->m_pMapLayer, 1);
     
     CCMenuItemFont *pExitItem = CCMenuItemFont::create("exit", this, menu_selector(FFGameScene::menuExitCallback));

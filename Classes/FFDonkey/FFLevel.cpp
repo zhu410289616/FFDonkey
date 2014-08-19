@@ -9,7 +9,7 @@
 #include "FFLevel.h"
 #include "FFFileManager.h"
 
-FFLevel* FFLevel::levelWithDictionary(CCDictionary *dict)
+FFLevel* FFLevel::create(CCDictionary *dict)
 {
     FFLevel *pLevel = new FFLevel(dict);
     if (pLevel) {
@@ -24,32 +24,44 @@ FFLevel::FFLevel(CCDictionary *dict)
 {
     std::string key = "level";
     this->m_nLevel = ((CCString *)dict->objectForKey(key))->intValue();
+    
     key = "map";
     this->m_pMapName = (CCString *)dict->objectForKey(key);
+    this->m_pMapName->retain();
+    
     key = "background_music";
     this->m_pBackgroundMusic = (CCString *)dict->objectForKey(key);
+    this->m_pBackgroundMusic->retain();
+    
     key = "push_effect";
     this->m_pPushEffect = (CCString *)dict->objectForKey(key);
+    this->m_pPushEffect->retain();
+    
     key = "win_effect";
     this->m_pWinEffect = (CCString *)dict->objectForKey(key);
+    this->m_pWinEffect->retain();
     
     //
     this->m_pMapElements = CCArray::create();
+    this->m_pMapElements->retain();
     
     std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename(this->m_pMapName->m_sString.c_str());
     std::string mapString = FFFileManager::readFileWithPath(path.c_str());
     this->m_pMapString = CCString::create(mapString);
     this->m_pMapString->retain();
+    CCLog("this->m_pMapString->retainCount(): %d", this->m_pMapString->retainCount());
     
     this->resetMapElements();
 }
 
-FFLevel::FFLevel()
-{
-}
-
 FFLevel::~FFLevel()
 {
+//    CC_SAFE_RELEASE(this->m_pMapName);
+//    CC_SAFE_RELEASE(this->m_pBackgroundMusic);
+//    CC_SAFE_RELEASE(this->m_pPushEffect);
+//    CC_SAFE_RELEASE(this->m_pWinEffect);
+//    CC_SAFE_RELEASE(this->m_pMapElements);
+//    CC_SAFE_RELEASE(this->m_pMapString);
 }
 
 void FFLevel::resetMapElements()
@@ -82,6 +94,8 @@ void FFLevel::resetMapElements()
                 columnPos++;
                 columnBegin = columnPos;
             }
+            
+            this->m_pMapElements->addObject(columnArray);
             
             rowPos++;
             rowBegin = rowPos;

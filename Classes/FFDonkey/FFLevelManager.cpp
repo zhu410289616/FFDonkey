@@ -13,14 +13,21 @@ static FFLevelManager *instance = NULL;
 FFLevelManager* FFLevelManager::sharedInstance()
 {
     if (!instance) {
-        instance = FFLevelManager::create();
+        instance = new FFLevelManager();
     }
     return instance;
 }
 
+FFLevelManager::FFLevelManager()
+{
+    this->m_pLevelArray = CCArray::create();
+    this->m_pLevelArray->retain();
+}
+
 FFLevelManager::~FFLevelManager()
 {
-//    CC_SAFE_DELETE_ARRAY(this->m_pLevelArray);
+//    CC_SAFE_RELEASE(this->m_pLevelArray);
+//    CC_SAFE_RELEASE(this->m_pLevel);
 }
 
 bool FFLevelManager::init()
@@ -28,17 +35,13 @@ bool FFLevelManager::init()
     bool bRet = false;
     
     do {
-        this->m_pLevelArray = CCArray::create();
-        this->m_pLevelArray->retain();
-        
         const char *plistPath = "level.plist";
         CCArray *plistArray = CCArray::createWithContentsOfFile(plistPath);
         CCObject *object;
         CCARRAY_FOREACH(plistArray, object)
         {
             CCDictionary *dict = (CCDictionary *)object;
-            FFLevel *level = new FFLevel(dict);//FFLevel::levelWithDictionary(dict);
-            level->retain();
+            FFLevel *level = FFLevel::create(dict);
             this->m_pLevelArray->addObject(level);
         }
         
@@ -61,6 +64,7 @@ bool FFLevelManager::setCurrentLevel(unsigned int currentLevel)
     this->m_nCurrentLevel = MAX(0, currentLevel);
     this->m_nCurrentLevel = MIN(this->m_pLevelArray->count()-1, currentLevel);
     this->m_pLevel = (FFLevel *)this->m_pLevelArray->objectAtIndex(this->m_nCurrentLevel);
+    this->m_pLevel->retain();
     return true;
 }
 

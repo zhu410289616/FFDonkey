@@ -16,24 +16,21 @@ USING_NS_CC;
 class FFLevel : public CCObject
 {
 public:
-    static FFLevel *levelWithDictionary(CCDictionary *dict);
+    static FFLevel *create(CCDictionary *dict);
     
 public:
     FFLevel(CCDictionary *dict);
-    FFLevel();
     ~FFLevel();
     
     void resetMapElements();
     
 public:
     int m_nLevel;
+    CCString *m_pMapName;
     CCString *m_pBackgroundMusic;
     CCString *m_pPushEffect;
     CCString *m_pWinEffect;
     CCArray *m_pMapElements;
-    
-private:
-    CCString *m_pMapName;
     CCString *m_pMapString;
 };
 

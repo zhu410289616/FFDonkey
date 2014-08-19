@@ -21,10 +21,8 @@ class FFLevelManager : CCObject
 public:
     static FFLevelManager *sharedInstance();
     
-private:
-    FFLevelManager(){};
-    
 public:
+    FFLevelManager();
     ~FFLevelManager();
     
     virtual bool init();

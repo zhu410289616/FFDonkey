@@ -20,15 +20,17 @@ public:
     static CCScene* scene();
     
 public:
+    FFGameScene();
+    ~FFGameScene();
+    
     virtual bool init();
-    void menuExitCallback(CCObject* pSender);
     CREATE_FUNC(FFGameScene);
+    
+    void menuExitCallback(CCObject* pSender);
     
 public:
     unsigned int m_nLevel;
-private:
     FFMapLayer *m_pMapLayer;
-    
 };
 
 #endif /* defined(__FFDonkey__FFGameScene__) */
