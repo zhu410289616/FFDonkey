@@ -14,7 +14,7 @@
 
 USING_NS_CC;
 
-class FFGameScene : public CCLayer
+class FFGameScene : public CCLayer, public FFMapLayerDelegate
 {
 public:
     static CCScene* scene();
@@ -27,6 +27,11 @@ public:
     CREATE_FUNC(FFGameScene);
     
     void menuExitCallback(CCObject* pSender);
+
+protected:
+    void didGameStart();
+    void didGameFinish();
+    void didBoxManMovedWithBox(bool isWithBox);
     
 public:
     unsigned int m_nLevel;

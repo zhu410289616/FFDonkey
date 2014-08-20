@@ -206,16 +206,28 @@ typedef enum _MoveType {
     FFMoveEnabledWithBoxMan  // 可以移动人和箱子
 } FFMoveType;
 
+class FFMapLayerDelegate
+{
+public:
+    virtual void didGameStart() = 0;
+    virtual void didGameFinish() = 0;
+    virtual void didBoxManMovedWithBox(bool isWithBox) = 0;
+};
+
 class FFMapLayer : public cocos2d::CCLayer
 {
 public:
     virtual bool init();
     CREATE_FUNC(FFMapLayer);
     
+    void setDelegate(FFMapLayerDelegate *delegate);
+    
     void loadMapWithLevel(FFLevel *level);
     void reloadMap();
-
+    
 private:
+    FFMapLayerDelegate *m_pDelegate;
+    
     void loadMap();
     FFIndexPath indexPathAtPoint(CCPoint point);
     CCPoint pointAtIndexPath(FFIndexPath indexPath);

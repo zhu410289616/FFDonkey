@@ -36,7 +36,7 @@ bool FFGameScene::init()
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
     
     this->m_pMapLayer = FFMapLayer::create();
-    this->m_pMapLayer->retain();
+    this->m_pMapLayer->setDelegate(this);
     FFLevel *tempLevel = FFLevelManager::sharedInstance()->currentLevel();
     this->m_pMapLayer->loadMapWithLevel(tempLevel);
     this->addChild(this->m_pMapLayer, 1);
@@ -55,4 +55,21 @@ bool FFGameScene::init()
 void FFGameScene::menuExitCallback(CCObject *pSender)
 {
     CCLOG("menuExitCallback...");
+}
+
+//FFMapLayerDelegate
+
+void FFGameScene::didGameStart()
+{
+    CCLog("didGameStart...");
+}
+
+void FFGameScene::didGameFinish()
+{
+    CCLog("didGameFinish...");
+}
+
+void FFGameScene::didBoxManMovedWithBox(bool isWithBox)
+{
+    CCLog("didBoxManMovedWithBox: %i", isWithBox);
 }

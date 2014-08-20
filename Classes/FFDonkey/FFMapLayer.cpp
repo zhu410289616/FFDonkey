@@ -7,6 +7,7 @@
 //
 
 #include "FFMapLayer.h"
+#include "SimpleAudioEngine.h"
 
 bool FFMapLayer::init()
 {
@@ -22,6 +23,11 @@ bool FFMapLayer::init()
     this->start = CCPointZero;
     this->end = CCPointZero;
     return true;
+}
+
+void FFMapLayer::setDelegate(FFMapLayerDelegate *delegate)
+{
+    this->m_pDelegate = delegate;
 }
 
 void FFMapLayer::loadMapWithLevel(FFLevel *level)
@@ -194,6 +200,11 @@ void FFMapLayer::loadMap()
             }//switch
         }//for
     }//for
+    
+    if (this->m_pDelegate) {
+        this->m_pDelegate->didGameStart();
+    }
+    this->setTouchEnabled(true);
 }
 
 FFIndexPath FFMapLayer::indexPathAtPoint(CCPoint point)
@@ -327,7 +338,11 @@ void FFMapLayer::moveManWithDirection(FFDirection direction, FFIndexPath indexPa
     
     setArrayAtIndexPath(this->m_pMapElements, indexPath, CCString::createWithFormat("%d", FFMapElementGreenRoad));
     setArrayAtIndexPath(this->m_pMapElements, nextIndexPath, CCString::createWithFormat("%d", FFMapElementMan));
-    //todo delegate
+    
+    //delegate
+    if (this->m_pDelegate) {
+        this->m_pDelegate->didBoxManMovedWithBox(false);
+    }
 }
 
 void FFMapLayer::moveBoxWithDirection(FFDirection direction, FFIndexPath indexPath)
@@ -386,7 +401,10 @@ void FFMapLayer::moveBoxWithDirection(FFDirection direction, FFIndexPath indexPa
     setArrayAtIndexPath(this->m_pMapElements, indexPath, CCString::createWithFormat("%d", FFMapElementMan));
     setArrayAtIndexPath(this->m_pMapElements, indexPath, CCString::createWithFormat("%d", FFMapElementBox));
     
-    //todo delegate
+    //delegate
+    if (this->m_pDelegate) {
+        this->m_pDelegate->didBoxManMovedWithBox(true);
+    }
     
     //todo check finish
     bool finish = false;
@@ -411,7 +429,7 @@ void FFMapLayer::moveBoxWithDirection(FFDirection direction, FFIndexPath indexPa
         }
     }
     if (finish) {
-        //todo win
+        this->scheduleOnce(schedule_selector(FFMapLayer::win), kMoveDuration);
     }
 }
 
@@ -422,6 +440,9 @@ void FFMapLayer::enabledTouch()
 
 void FFMapLayer::win()
 {
+    if (this->m_pDelegate) {
+        this->m_pDelegate->didGameFinish();
+    }
 }
 
 bool FFMapLayer::ccTouchBegan(cocos2d::CCTouch *touch, cocos2d::CCEvent *event)
