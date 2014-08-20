@@ -239,9 +239,9 @@ private:
     void win();
     
 protected:
-    bool ccTouchBegan(CCTouch* touch, CCEvent* event);
-	void ccTouchEnded(CCTouch* touch, CCEvent* event);
-	void ccTouchCancelled(CCTouch* touch, CCEvent* event);
+    void ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
+    void ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
+    void ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent);
     
 private:
     FFLevel *m_pLevel;                  //当前关数

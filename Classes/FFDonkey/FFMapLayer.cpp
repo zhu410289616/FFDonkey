@@ -445,14 +445,15 @@ void FFMapLayer::win()
     }
 }
 
-bool FFMapLayer::ccTouchBegan(cocos2d::CCTouch *touch, cocos2d::CCEvent *event)
+void FFMapLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)
 {
+    CCTouch *touch = (CCTouch *)pTouches->anyObject();
     this->start = touch->getLocationInView();
-    return true;
 }
 
-void FFMapLayer::ccTouchEnded(cocos2d::CCTouch *touch, cocos2d::CCEvent *event)
+void FFMapLayer::ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)
 {
+    CCTouch *touch = (CCTouch *)pTouches->anyObject();
     this->end = touch->getLocationInView();
     FFDirection direction = this->directionFromPoint(this->start, this->end);
     if (direction != FFDirectionUnknown) {
@@ -469,7 +470,7 @@ void FFMapLayer::ccTouchEnded(cocos2d::CCTouch *touch, cocos2d::CCEvent *event)
     }
 }
 
-void FFMapLayer::ccTouchCancelled(cocos2d::CCTouch *touch, cocos2d::CCEvent *event)
+void FFMapLayer::ccTouchesCancelled(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)
 {
     this->start = CCPointZero;
     this->end = CCPointZero;

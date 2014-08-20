@@ -8,6 +8,7 @@
 
 #include "FFGameScene.h"
 #include "FFLevelManager.h"
+#include "FFDonkeyScene.h"
 
 CCScene* FFGameScene::scene()
 {
@@ -55,6 +56,8 @@ bool FFGameScene::init()
 void FFGameScene::menuExitCallback(CCObject *pSender)
 {
     CCLOG("menuExitCallback...");
+    
+    CCDirector::sharedDirector()->replaceScene(FFDonkeyScene::scene());
 }
 
 //FFMapLayerDelegate
