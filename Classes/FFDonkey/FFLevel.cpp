@@ -23,32 +23,31 @@ FFLevel* FFLevel::create(CCDictionary *dict)
 FFLevel::FFLevel(CCDictionary *dict)
 {
     std::string key = "level";
-    this->m_nLevel = ((CCString *)dict->objectForKey(key))->intValue();
+    CCString *value = (CCString *)dict->objectForKey(key);
+    this->m_nLevel = value->intValue();
     
     key = "map";
-    this->m_pMapName = (CCString *)dict->objectForKey(key);
-    this->m_pMapName->retain();
+    value = (CCString *)dict->objectForKey(key);
+    this->m_pMapName = new CCString(value->m_sString);
     
     key = "background_music";
-    this->m_pBackgroundMusic = (CCString *)dict->objectForKey(key);
-    this->m_pBackgroundMusic->retain();
+    value = (CCString *)dict->objectForKey(key);
+    this->m_pBackgroundMusic = new CCString(value->m_sString);
     
     key = "push_effect";
-    this->m_pPushEffect = (CCString *)dict->objectForKey(key);
-    this->m_pPushEffect->retain();
+    value = (CCString *)dict->objectForKey(key);
+    this->m_pPushEffect = new CCString(value->m_sString);
     
     key = "win_effect";
-    this->m_pWinEffect = (CCString *)dict->objectForKey(key);
-    this->m_pWinEffect->retain();
+    value = (CCString *)dict->objectForKey(key);
+    this->m_pWinEffect = new CCString(value->m_sString);
     
     //
-    this->m_pMapElements = CCArray::create();
-    this->m_pMapElements->retain();
+    this->m_pMapElements = new CCArray();
     
     std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename(this->m_pMapName->m_sString.c_str());
     std::string mapString = FFFileManager::readFileWithPath(path.c_str());
-    this->m_pMapString = CCString::create(mapString);
-    this->m_pMapString->retain();
+    this->m_pMapString = new CCString(mapString);
     CCLog("this->m_pMapString->retainCount(): %d", this->m_pMapString->retainCount());
     
     this->resetMapElements();
@@ -56,12 +55,12 @@ FFLevel::FFLevel(CCDictionary *dict)
 
 FFLevel::~FFLevel()
 {
-//    CC_SAFE_RELEASE(this->m_pMapName);
-//    CC_SAFE_RELEASE(this->m_pBackgroundMusic);
-//    CC_SAFE_RELEASE(this->m_pPushEffect);
-//    CC_SAFE_RELEASE(this->m_pWinEffect);
-//    CC_SAFE_RELEASE(this->m_pMapElements);
-//    CC_SAFE_RELEASE(this->m_pMapString);
+    CC_SAFE_RELEASE(this->m_pMapName);
+    CC_SAFE_RELEASE(this->m_pBackgroundMusic);
+    CC_SAFE_RELEASE(this->m_pPushEffect);
+    CC_SAFE_RELEASE(this->m_pWinEffect);
+    CC_SAFE_RELEASE(this->m_pMapElements);
+    CC_SAFE_RELEASE(this->m_pMapString);
 }
 
 void FFLevel::resetMapElements()

@@ -41,7 +41,6 @@ bool FFDonkeyScene::init()
     
 //    CCMenuItemImage *pTestItem = CCMenuItemImage:create();
     
-    FFLevelManager::sharedInstance();
     
     CCMenu* pMenu = CCMenu::create(pStartItem, NULL);
     pMenu->setPosition(CCPointZero);

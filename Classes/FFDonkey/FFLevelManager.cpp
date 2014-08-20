@@ -14,19 +14,19 @@ FFLevelManager* FFLevelManager::sharedInstance()
 {
     if (!instance) {
         instance = new FFLevelManager();
+        instance->init();
     }
     return instance;
 }
 
 FFLevelManager::FFLevelManager()
 {
-    this->m_pLevelArray = CCArray::create();
-    this->m_pLevelArray->retain();
+    this->m_pLevelArray = new CCArray();
 }
 
 FFLevelManager::~FFLevelManager()
 {
-//    CC_SAFE_RELEASE(this->m_pLevelArray);
+    CC_SAFE_RELEASE(this->m_pLevelArray);
 //    CC_SAFE_RELEASE(this->m_pLevel);
 }
 

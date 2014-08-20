@@ -11,6 +11,8 @@
 
 #include "cocos2d.h"
 
+USING_NS_CC;
+
 class FFDonkeyScene : public cocos2d::CCLayer {
     
 public:
